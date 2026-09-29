@@ -1,8 +1,8 @@
 // scale factor
-$medium-desktop-scale-factor: 0.8;
-$small-desktop-scale-factor: 0.66;
-$tablet-scale-factor: 0.5;
-$mobile-scale-factor: 0.288;
+$medium-desktop-scale-factor: 0.85;
+$small-desktop-scale-factor: 0.72;
+$tablet-scale-factor: 0.55;
+$mobile-scale-factor: 0.38;
 $scale-factors: (
   $medium-desktop: $medium-desktop-scale-factor,
   $small-desktop: $small-desktop-scale-factor,
@@ -18,27 +18,26 @@ $z-index-slot: 3;
 $z-index-title: 4;
 $z-index-draw-button: 5;
 $z-index-settings: 10;
+$z-index-winner-modal: 20;
 
 // title
-$title-width: 31rem;
-$title-margin-top: 1.75rem;
-$title-margin-bottom: 4.875rem;
+$title-width: 27rem;
+$title-margin-top: 1rem;
+$title-margin-bottom: 1.5rem;
 
 // reel
-$reel-item-height: 7.5rem;
+$reel-item-height: 3.875rem;
 
 // slot
-$slot-width: 62.5rem;
-$slot-height: 14.375rem;
-$slot-border-radius: 1.25rem;
-$slot-border-width: 1.625rem;
-$slot-inner-padding: (
-    $slot-height - ($slot-border-width * 2) - $reel-item-height
-  ) / 2;
+$slot-width: 56rem;
+$slot-height: 5.625rem;
+$slot-border-radius: 1.125rem;
+$slot-border-width: 0.875rem;
+$slot-inner-padding: 0;
 
 // draw-button
-$draw-button-margin-top: 5.5rem;
-$draw-button-width: 22.5rem;
+$draw-button-margin-top: 1.75rem;
+$draw-button-width: 20rem;
 
 // settings
 $setting-panel-max-width: 33.125rem; // 530px;
@@ -47,4 +46,4 @@ $setting-panel-max-width: 33.125rem; // 530px;
 $switch-handle-diameter: 24px;
 $switch-slider-width: 75px;
 $switch-slider-height: 30px;
-$switch-slider-padding: ($switch-slider-height - $switch-handle-diameter) / 2;
+$switch-slider-padding: 3px;

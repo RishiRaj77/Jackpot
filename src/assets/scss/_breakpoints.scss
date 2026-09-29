@@ -9,14 +9,8 @@ $screen-xxl: 1600px;
 $mobile: 'only screen and (max-width: #{$screen-sm - 1})';
 $tablet: 'only screen and (min-width: #{$screen-sm}) and (max-width: #{$screen-md - 1})';
 $desktop: 'only screen and (min-width: #{$screen-md})';
-$small-desktop: 'only screen and (min-width: #{$screen-md})' and
-  (
-    max-width: #{$screen-xl - 1},
-  );
-$medium-desktop: 'only screen and (min-width: #{$screen-xl})' and
-  (
-    max-width: #{$screen-xxl - 1},
-  );
+$small-desktop: 'only screen and (min-width: #{$screen-md}) and (max-width: #{$screen-xl - 1})';
+$medium-desktop: 'only screen and (min-width: #{$screen-xl}) and (max-width: #{$screen-xxl - 1})';
 $tablet-desktop: 'only screen and (min-width: #{$screen-sm})';
 $mobile-tablet: 'only screen and (max-width: #{$screen-md - 1})';
 

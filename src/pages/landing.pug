@@ -1,12 +1,6 @@
 include ../mixins/icons
 
 .main
-  .control-group
-    button#fullscreen-button.icon-button.icon-button--small
-      +svg-icon.red.big(svg-icon-name='fullscreen')
-    button#settings-button.icon-button.icon-button--small
-      +svg-icon.red.big(svg-icon-name='settings')
-
   canvas#confetti-canvas.confetti
 
   #lucky-draw
@@ -14,27 +8,65 @@ include ../mixins/icons
       //- Pug loader currently does not handle webpack alias so we will use relative path here
       include ../assets/images/title.svg
 
-    .slot
-      .slot__outer
-        .slot__inner
-          .slot__shadow
-          #reel.reel
+    .slots-container
+      .slot-row
+        .slot__outer
+          .slot__inner
+            .slot__shadow
+            #reel-state.reel
+
+      .slot-row
+        .slot__outer
+          .slot__inner
+            .slot__shadow
+            #reel-unit.reel
+
+      .slot-row
+        .slot__outer
+          .slot__inner
+            .slot__shadow
+            #reel-code.reel
+
+      .slot-row
+        .slot__outer
+          .slot__inner
+            .slot__shadow
+            #reel-dealer.reel
 
       #sunburst.sunburst
         img(src="~@images/sunburst.svg" alt="sunburst")
 
     button#draw-button.solid-button Draw
 
+  //- Winner Announcement Modal
+  #winner-modal.winner-modal
+    .winner-modal__backdrop
+    .winner-modal__dialog
+      .winner-modal__badge 🏆 LUCKY DRAW WINNER
+      h2#winner-dealer.winner-modal__dealer S.K. ENTERPRISE
+      .winner-modal__award#winner-award 1st Runner Up - DSP Volume
+      .winner-modal__grid
+        .winner-modal__item
+          span.winner-modal__label STATE
+          strong#winner-state NE1
+        .winner-modal__item
+          span.winner-modal__label UNIT
+          strong#winner-unit Goalpara & Meghalaya-II
+        .winner-modal__item
+          span.winner-modal__label CODE
+          strong#winner-code 7028240
+      button#winner-close.solid-button Continue
+
   #settings.settings
     #settings-panel.settings__panel
       div.settings__panel__group
         h1.settings__title Settings
         div.input-group
-          label.input-label(for="name-list") Name List
-          textarea.input-field.input-field--textarea(rows="8" placeholder="Separate each name by line break" id="name-list")
+          label.input-label(for="dealers-count") Active Dealers in Pool
+          input.input-field#dealers-count(type="text" readonly="true")
 
         div.input-group.input-group--2-column
-          label.input-label(for="remove-from-list") Remove winner from list
+          label.input-label(for="remove-from-list") Remove winner from pool
           label.input--switch
             input(type="checkbox" checked="true" id="remove-from-list")
             span.slider
@@ -44,7 +76,11 @@ include ../mixins/icons
           label.input--switch
             input(type="checkbox" checked="true" id="enable-sound")
             span.slider
-      div.settings__panel__group
-        button#settings-save.solid-button.solid-button Save
-        button#settings-close.solid-button.solid-button--danger Discard and close
 
+        div.input-group
+          label.input-label Dealers in Pool
+          textarea.input-field.input-field--textarea(rows="7" readonly="true" id="dealers-preview")
+
+      div.settings__panel__group
+        button#settings-reset.solid-button.solid-button--danger(style="margin-bottom: 0.75rem;") Reset Dealer Pool
+        button#settings-close.solid-button Close

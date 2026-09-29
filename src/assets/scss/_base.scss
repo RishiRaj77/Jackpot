@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap');
 
+@font-face {
+  font-family: 'Devinne Swash';
+  src: url('@fonts/DevinneSwash.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Devinne Swash Shadow';
+  src: url('@fonts/DevinneSwashShadow.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 *:not(input, textarea, select) {
   -webkit-user-select: none;
   -webkit-touch-callout: none;
@@ -22,10 +38,10 @@ body {
   height: 100%;
   font-size: 16px;
   line-height: 1.5;
-  font-family: 'Nunito Sans', 微軟正黑體, 'Microsoft JhengHei',
+  font-family: 'Devinne Swash', 'Nunito Sans', 微軟正黑體, 'Microsoft JhengHei',
     'Microsoft JhengHei UI', 'Microsoft YaHei', 'Microsoft YaHei UI',
     'PingFang TC', 'Lantinghei TC', 'Heiti TC', 'Apple LiGothic', 'PMingLiU',
-    Arial, sans-serif;
+    Arial, serif;
 }
 
 #app {
@@ -93,6 +109,7 @@ body {
 }
 
 .footer {
+  display: none !important;
   width: 100%;
   padding: 0.3125rem;
   font-size: 0.75rem;
