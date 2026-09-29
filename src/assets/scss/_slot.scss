@@ -13,17 +13,18 @@
   z-index: $z-index-title;
 
   img {
-    width: 6.25rem;
+    width: 10.5rem;
+    max-width: 80vw;
     height: auto;
     display: inline-block;
-    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.35));
   }
 
   @each $media-query, $factor in $scale-factors {
     @media #{$media-query} {
       margin-bottom: 0.35rem * $factor;
       img {
-        width: max(3.75rem, 6.25rem * $factor);
+        width: max(6.5rem, 10.5rem * $factor);
       }
     }
   }
