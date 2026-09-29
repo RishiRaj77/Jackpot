@@ -6,28 +6,7 @@
 }
 
 .brand-logo {
-  display: block;
-  margin: 0 auto 1.5rem auto;
-  text-align: center;
-  position: relative;
-  z-index: $z-index-title;
-
-  img {
-    width: 12.5rem;
-    max-width: 85vw;
-    height: auto;
-    display: inline-block;
-    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.35));
-  }
-
-  @each $media-query, $factor in $scale-factors {
-    @media #{$media-query} {
-      margin-bottom: max(0.65rem, 1.5rem * $factor);
-      img {
-        width: max(7.5rem, 12.5rem * $factor);
-      }
-    }
-  }
+  display: none !important;
 }
 
 .title {
