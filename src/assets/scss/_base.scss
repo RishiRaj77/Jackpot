@@ -45,6 +45,7 @@ body {
   min-width: 320px;
   height: 100%;
   overflow: hidden;
+  background-color: $color-chroma-green;
   line-height: 1.5;
   font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   scrollbar-width: none;
@@ -58,14 +59,7 @@ body {
 }
 
 #app {
-  background: linear-gradient(
-    240deg,
-    $color-red-step1 0.13%,
-    $color-red-step2 26.19%,
-    $color-red-step3 52.6%,
-    $color-red-step4 79.08%,
-    $color-red-step5 100%
-  );
+  background: $color-chroma-green;
   color: $color-text-light;
   padding: 0 3.125rem;
   height: 100%;

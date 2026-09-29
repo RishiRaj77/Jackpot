@@ -7,14 +7,14 @@
 
 .brand-logo {
   display: block;
-  margin: 0 auto 0.5rem auto;
+  margin: 0 auto 1.5rem auto;
   text-align: center;
   position: relative;
   z-index: $z-index-title;
 
   img {
-    width: 10.5rem;
-    max-width: 80vw;
+    width: 12.5rem;
+    max-width: 85vw;
     height: auto;
     display: inline-block;
     filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.35));
@@ -22,36 +22,16 @@
 
   @each $media-query, $factor in $scale-factors {
     @media #{$media-query} {
-      margin-bottom: 0.35rem * $factor;
+      margin-bottom: max(0.65rem, 1.5rem * $factor);
       img {
-        width: max(6.5rem, 10.5rem * $factor);
+        width: max(7.5rem, 12.5rem * $factor);
       }
     }
   }
 }
 
 .title {
-  height: auto;
-  max-width: $title-width;
-  width: 100%;
-  margin: 0.25rem 0 $title-margin-bottom 0;
-  position: relative;
-  z-index: $z-index-title; // make sure title on top of sunburst
-  color: $color-title-border;
-  display: inline-block;
-
-  @each $media-query, $factor in $scale-factors {
-    @media #{$media-query} {
-      max-width: $title-width * $factor;
-      margin: $title-margin-top 0 $title-margin-bottom * $factor 0;
-    }
-  }
-
-  svg {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+  display: none !important;
 }
 
 .control-group {
@@ -332,7 +312,7 @@
   margin: -50vh 0 0 -50vw;
   width: 100vw;
   height: 100vh;
-  display: none;
+  display: none !important;
   z-index: $z-index-sunburst;
   pointer-events: none;
   overflow: hidden;
