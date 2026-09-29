@@ -26,6 +26,14 @@
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+
+  &::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
 }
 
 html,
@@ -35,9 +43,18 @@ body {
   font-size: 16px;
   width: 100%;
   min-width: 320px;
-  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
   line-height: 1.5;
   font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
 }
 
 #app {
@@ -50,15 +67,24 @@ body {
     $color-red-step5 100%
   );
   color: $color-text-light;
-  padding: 1.5rem 1rem;
-  min-height: 100vh;
+  padding: 0 3.125rem;
+  height: 100%;
+  min-height: 100%;
   box-sizing: border-box;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
   @include flex-center;
 
   @media #{$mobile} {
-    padding: 1rem 0.5rem;
+    padding: 0 0.5rem;
   }
 
   // Fixing the notch issue on iOS when using "viewport-fit=cover"
@@ -83,25 +109,29 @@ body {
   }
 
   @supports (padding: unquote('max(0px)')) {
-    padding: unquote('max(1rem, var(--safe-area-inset-top)) max(2rem, var(--safe-area-inset-right)) max(1rem, var(--safe-area-inset-bottom)) max(2rem, var(--safe-area-inset-left))');
+    padding: 0
+      unquote(
+        'max(3.125rem, var(--safe-area-inset-right)) 0 max(3.125rem, var(--safe-area-inset-left))'
+      );
 
     @media #{$mobile} {
-      padding: unquote('max(0.5rem, var(--safe-area-inset-top)) max(0.5rem, var(--safe-area-inset-right)) max(0.75rem, var(--safe-area-inset-bottom)) max(0.5rem, var(--safe-area-inset-left))');
+      padding: 0
+        unquote(
+          'max(0.5rem, var(--safe-area-inset-right)) 0 max(0.5rem, var(--safe-area-inset-left))'
+        );
     }
   }
 }
 
 .main {
   @include flex-center;
-  padding: 1.5rem 0;
+  padding: 0;
   width: 100%;
   max-width: $screen-xl;
-  flex: 1 1 auto;
+  height: 100%;
+  flex: 1 1 0;
   min-height: min-content;
-
-  @media #{$mobile} {
-    padding: 0.5rem 0;
-  }
+  overflow: hidden;
 }
 
 .footer {
