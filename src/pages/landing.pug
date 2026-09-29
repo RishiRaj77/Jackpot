@@ -4,6 +4,9 @@ include ../mixins/icons
   canvas#confetti-canvas.confetti
 
   #lucky-draw
+    .brand-logo
+      img(src="~@images/logo.png" alt="Logo")
+
     .title
       //- Pug loader currently does not handle webpack alias so we will use relative path here
       include ../assets/images/title.svg

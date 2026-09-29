@@ -5,11 +5,35 @@
   z-index: $z-index-lucky-draw; // make sure contents are on top of confetting
 }
 
+.brand-logo {
+  display: block;
+  margin: 0 auto 0.5rem auto;
+  text-align: center;
+  position: relative;
+  z-index: $z-index-title;
+
+  img {
+    width: 6.25rem;
+    height: auto;
+    display: inline-block;
+    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.25));
+  }
+
+  @each $media-query, $factor in $scale-factors {
+    @media #{$media-query} {
+      margin-bottom: 0.35rem * $factor;
+      img {
+        width: max(3.75rem, 6.25rem * $factor);
+      }
+    }
+  }
+}
+
 .title {
   height: auto;
   max-width: $title-width;
   width: 100%;
-  margin: $title-margin-top 0 $title-margin-bottom 0;
+  margin: 0.25rem 0 $title-margin-bottom 0;
   position: relative;
   z-index: $z-index-title; // make sure title on top of sunburst
   color: $color-title-border;
