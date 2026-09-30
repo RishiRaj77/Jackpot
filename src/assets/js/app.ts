@@ -92,7 +92,7 @@ import { DEALERS } from '@js/dealers';
     if (winnerModal) winnerModal.classList.remove('winner-modal--visible');
     drawButton.disabled = true;
     if (settingsButton) settingsButton.disabled = true;
-    soundEffects.spin(5.0);
+    soundEffects.spin(6.5);
   };
 
   const onSpinEnd = async (winner: Dealer) => {
