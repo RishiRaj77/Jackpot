@@ -43,8 +43,8 @@ module.exports = merge(baseWebpackConfig, {
       filename: 'assets/css/[name].[chunkhash:8].css'
     }),
     new WorkboxPlugin.GenerateSW({
-      clientsClaim: false,
-      skipWaiting: false
+      clientsClaim: true,
+      skipWaiting: true
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
