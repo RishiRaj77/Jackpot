@@ -186,11 +186,11 @@ export default class SlotMachine {
     const unitCandidates = [...new Set(this.allDealers.map((d) => d.unit))];
     const stateCandidates = [...new Set(this.allDealers.map((d) => d.state))];
 
-    // Staggered spin execution (all spin together, each rolls >= 7s: 7.0s, 7.5s, 8.0s, 8.5s)
-    const pCode = this.reelCode.spinToTarget(winner.code, codeCandidates, 7000, 70);
-    const pDealer = this.reelDealer.spinToTarget(winner.dealerName, dealerCandidates, 7500, 75);
-    const pUnit = this.reelUnit.spinToTarget(winner.unit, unitCandidates, 8000, 80);
-    const pState = this.reelState.spinToTarget(winner.state, stateCandidates, 8500, 85);
+    // Staggered spin execution (all spin together, each rolls >= 6.5s: 6.5s, 7.0s, 7.5s, 8.0s)
+    const pCode = this.reelCode.spinToTarget(winner.code, codeCandidates, 6500, 65);
+    const pDealer = this.reelDealer.spinToTarget(winner.dealerName, dealerCandidates, 7000, 70);
+    const pUnit = this.reelUnit.spinToTarget(winner.unit, unitCandidates, 7500, 75);
+    const pState = this.reelState.spinToTarget(winner.state, stateCandidates, 8000, 80);
 
     await Promise.all([pCode, pDealer, pUnit, pState]);
 
