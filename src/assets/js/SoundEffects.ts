@@ -1,4 +1,5 @@
 import { PIANO_KEYS, PianoKey } from '@js/constants';
+import spinAudioSrc from '../audio/slot-machine-jackpot-sound-effect.mp3';
 
 interface SoundConfig {
   /** Oscillator type, can be "sawtooth" | "sine" | "square" | "triangle" */
@@ -16,7 +17,7 @@ interface SoundSeries {
   duration: number;
 }
 
-/** Class for playing sound effects via AudioContext */
+/** Class for playing sound effects via AudioContext and HTML5 Audio */
 export default class SoundEffects {
   /** Audio context instancce */
   private audioContext?: AudioContext;
@@ -24,17 +25,33 @@ export default class SoundEffects {
   /** Indicator for whether this sound effect instance is muted */
   private isMuted: boolean;
 
+  /** HTMLAudioElement for recorded spin audio */
+  private spinAudio?: HTMLAudioElement;
+
   constructor(isMuted = false) {
     if (window.AudioContext || window.webkitAudioContext) {
       this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
     }
 
     this.isMuted = isMuted;
+
+    try {
+      this.spinAudio = new Audio(spinAudioSrc);
+      this.spinAudio.preload = 'auto';
+    } catch {
+      // Audio element not supported
+    }
   }
 
   /** Setter for isMuted */
   set mute(mute: boolean) {
     this.isMuted = mute;
+    if (this.spinAudio) {
+      this.spinAudio.muted = mute;
+      if (mute) {
+        this.stopSpin();
+      }
+    }
   }
 
   /** Getter for isMuted */
@@ -117,30 +134,44 @@ export default class SoundEffects {
    * @param durationInSecond  Duration of sound effect in seconds
    * @returns Has sound effect been played
    */
-  public spin(durationInSecond: number): Promise<boolean> {
+  public spin(durationInSecond = 5.0): Promise<boolean> {
     if (this.isMuted) {
       return Promise.resolve(false);
     }
 
-    const musicNotes: SoundSeries[] = [
-      { key: 'D#3', duration: 0.1 },
-      { key: 'C#3', duration: 0.1 },
-      { key: 'C3', duration: 0.1 }
-    ];
-
-    const totalDuration = musicNotes
-      .reduce((currentNoteTime, { duration }) => currentNoteTime + duration, 0);
-
-    const duration = Math.floor(durationInSecond * 10);
-    this.playSound(
-      Array.from(Array(duration), (_, index) => musicNotes[index % 3]),
-      { type: 'triangle', easeOut: false, volume: 2 }
-    );
+    if (this.spinAudio) {
+      try {
+        this.spinAudio.currentTime = 0;
+        this.spinAudio.loop = true;
+        const playPromise = this.spinAudio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((err) => {
+            console.warn('Audio playback prevented:', err);
+          });
+        }
+      } catch (err) {
+        console.warn('Spin audio error:', err);
+      }
+    }
 
     return new Promise<boolean>((resolve) => {
       setTimeout(() => {
         resolve(true);
-      }, totalDuration * 1000);
+      }, durationInSecond * 1000);
     });
+  }
+
+  /**
+   * Stop the spinning audio effect immediately
+   */
+  public stopSpin(): void {
+    if (this.spinAudio) {
+      try {
+        this.spinAudio.pause();
+        this.spinAudio.currentTime = 0;
+      } catch {
+        // ignore
+      }
+    }
   }
 }

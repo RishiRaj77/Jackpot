@@ -3,7 +3,7 @@ export interface Dealer {
   unit: string;
   code: string;
   dealerName: string;
-  award: string;
+  award?: string;
 }
 
 export interface ReelConfig {
@@ -118,10 +118,10 @@ export interface SlotMachineConfig {
 
 /** Central Jackpot Coordinator controlling all 4 horizontal carousel fields */
 export default class SlotMachine {
-  private reelState: SlotReel;
-  private reelUnit: SlotReel;
   private reelCode: SlotReel;
   private reelDealer: SlotReel;
+  private reelUnit: SlotReel;
+  private reelState: SlotReel;
 
   private allDealers: Dealer[];
   private activePool: Dealer[];
@@ -137,10 +137,10 @@ export default class SlotMachine {
     this.onSpinStart = config.onSpinStart;
     this.onSpinEnd = config.onSpinEnd;
 
-    this.reelState = new SlotReel({ containerSelector: '#reel-state', initialValue: 'STATE' });
-    this.reelUnit = new SlotReel({ containerSelector: '#reel-unit', initialValue: 'UNIT' });
     this.reelCode = new SlotReel({ containerSelector: '#reel-code', initialValue: 'DEALER CODE' });
     this.reelDealer = new SlotReel({ containerSelector: '#reel-dealer', initialValue: 'DEALER NAME' });
+    this.reelUnit = new SlotReel({ containerSelector: '#reel-unit', initialValue: 'UNIT' });
+    this.reelState = new SlotReel({ containerSelector: '#reel-state', initialValue: 'STATE' });
   }
 
   get remainingCount(): number {
@@ -181,18 +181,18 @@ export default class SlotMachine {
     }
 
     // Extract unique candidate options for spinning reels
-    const stateCandidates = [...new Set(this.allDealers.map((d) => d.state))];
-    const unitCandidates = [...new Set(this.allDealers.map((d) => d.unit))];
     const codeCandidates = [...new Set(this.allDealers.map((d) => d.code))];
     const dealerCandidates = [...new Set(this.allDealers.map((d) => d.dealerName))];
+    const unitCandidates = [...new Set(this.allDealers.map((d) => d.unit))];
+    const stateCandidates = [...new Set(this.allDealers.map((d) => d.state))];
 
-    // Staggered spin execution (suspense timing)
-    const pState = this.reelState.spinToTarget(winner.state, stateCandidates, 2000, 24);
-    const pUnit = this.reelUnit.spinToTarget(winner.unit, unitCandidates, 2600, 28);
-    const pCode = this.reelCode.spinToTarget(winner.code, codeCandidates, 3200, 32);
-    const pDealer = this.reelDealer.spinToTarget(winner.dealerName, dealerCandidates, 3800, 36);
+    // Staggered spin execution (suspense timing in sequence: Dealer Code -> Name -> Unit -> State, 5.0s total)
+    const pCode = this.reelCode.spinToTarget(winner.code, codeCandidates, 2750, 30);
+    const pDealer = this.reelDealer.spinToTarget(winner.dealerName, dealerCandidates, 3500, 38);
+    const pUnit = this.reelUnit.spinToTarget(winner.unit, unitCandidates, 4250, 44);
+    const pState = this.reelState.spinToTarget(winner.state, stateCandidates, 5000, 50);
 
-    await Promise.all([pState, pUnit, pCode, pDealer]);
+    await Promise.all([pCode, pDealer, pUnit, pState]);
 
     if (this.onSpinEnd) {
       this.onSpinEnd(winner);

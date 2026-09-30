@@ -9,7 +9,13 @@ include ../mixins/icons
         .slot__outer
           .slot__inner
             .slot__shadow
-            #reel-state.reel
+            #reel-code.reel
+
+      .slot-row
+        .slot__outer
+          .slot__inner
+            .slot__shadow
+            #reel-dealer.reel
 
       .slot-row
         .slot__outer
@@ -21,13 +27,7 @@ include ../mixins/icons
         .slot__outer
           .slot__inner
             .slot__shadow
-            #reel-code.reel
-
-      .slot-row
-        .slot__outer
-          .slot__inner
-            .slot__shadow
-            #reel-dealer.reel
+            #reel-state.reel
 
       #sunburst.sunburst
         img(src="~@images/sunburst.svg" alt="sunburst")
@@ -39,18 +39,18 @@ include ../mixins/icons
     .winner-modal__backdrop
     .winner-modal__dialog
       .winner-modal__badge 🏆 LUCKY DRAW WINNER
-      h2#winner-dealer.winner-modal__dealer S.K. ENTERPRISE
-      .winner-modal__award#winner-award 1st Runner Up - DSP Volume
+      h2#winner-dealer.winner-modal__dealer ---
+      .winner-modal__award#winner-award(style="display:none")
       .winner-modal__grid
-        .winner-modal__item.winner-modal__item--state
-          span.winner-modal__label STATE
-          strong#winner-state NE1
-        .winner-modal__item.winner-modal__item--unit
-          span.winner-modal__label UNIT
-          strong#winner-unit Goalpara & Meghalaya-II
         .winner-modal__item.winner-modal__item--code
           span.winner-modal__label CODE
-          strong#winner-code 7028240
+          strong#winner-code ---
+        .winner-modal__item.winner-modal__item--unit
+          span.winner-modal__label UNIT
+          strong#winner-unit ---
+        .winner-modal__item.winner-modal__item--state
+          span.winner-modal__label STATE
+          strong#winner-state ---
       button#winner-close.solid-button Continue
 
   #settings.settings

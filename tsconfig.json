@@ -25,7 +25,8 @@
       "@js/*": ["src/assets/js/*"],
       "@styles/*": ["src/assets/scss/*"],
       "@images/*": ["src/assets/images/*"],
-      "@fonts/*": ["src/assets/fonts/*"]
+      "@fonts/*": ["src/assets/fonts/*"],
+      "@audio/*": ["src/assets/audio/*"]
     },
   },
   "include": ["src/**/*.ts", "./declarations.d.ts"],

@@ -82,7 +82,7 @@ import { DEALERS } from '@js/dealers';
     }
     if (dealersPreviewText) {
       dealersPreviewText.value = slotMachine.remainingDealers
-        .map((d) => `[${d.state}] ${d.unit} | ${d.code} | ${d.dealerName} (${d.award})`)
+        .map((d) => `[${d.code}] ${d.dealerName} | ${d.unit} | ${d.state}${d.award ? ` (${d.award})` : ''}`)
         .join('\n');
     }
   };
@@ -92,18 +92,27 @@ import { DEALERS } from '@js/dealers';
     if (winnerModal) winnerModal.classList.remove('winner-modal--visible');
     drawButton.disabled = true;
     if (settingsButton) settingsButton.disabled = true;
-    soundEffects.spin(3.8);
+    soundEffects.spin(5.0);
   };
 
   const onSpinEnd = async (winner: Dealer) => {
+    soundEffects.stopSpin();
     confettiAnimation();
     sunburstSvg.style.display = 'block';
 
     if (winnerDealer) winnerDealer.textContent = winner.dealerName;
-    if (winnerAward) winnerAward.textContent = winner.award;
-    if (winnerState) winnerState.textContent = winner.state;
-    if (winnerUnit) winnerUnit.textContent = winner.unit;
+    if (winnerAward) {
+      if (winner.award) {
+        winnerAward.textContent = winner.award;
+        winnerAward.style.display = 'block';
+      } else {
+        winnerAward.textContent = '';
+        winnerAward.style.display = 'none';
+      }
+    }
     if (winnerCode) winnerCode.textContent = winner.code;
+    if (winnerUnit) winnerUnit.textContent = winner.unit;
+    if (winnerState) winnerState.textContent = winner.state;
 
     await soundEffects.win();
 

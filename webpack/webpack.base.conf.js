@@ -62,7 +62,8 @@ module.exports = {
       '@js': path.resolve(__dirname, '../src/assets/js'),
       '@styles': path.resolve(__dirname, '../src/assets/scss'),
       '@images': path.resolve(__dirname, '../src/assets/images'),
-      '@fonts': path.resolve(__dirname, '../src/assets/fonts')
+      '@fonts': path.resolve(__dirname, '../src/assets/fonts'),
+      '@audio': path.resolve(__dirname, '../src/assets/audio')
     }
   },
   module: {
